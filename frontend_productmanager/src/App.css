@@ -1,4 +1,4 @@
-.App {
+.content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,13 @@
   height: 100vh;
   padding: 0px 200px;
 }
-
+.navbar{
+  background-color: #53B3CB;
+  padding: 10px;
+}
+.navbar p{
+  margin: 0px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -18,12 +24,98 @@
   color: white;
 }
 
+
 .productsContainer{
   width: 50%;
-  height: 50%;  
+  height: 90%;  
+  margin: 20px;
+  padding: 20px;
 }
 
 .productFormContainer{
   width: 50%;
-  height: 50%;
+  height: 90%;
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ProductContainer{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin: 5px;
+  border-bottom: 1px solid #eeeeee;
+}
+.textbox{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 5px;
+  margin: 5px;
+  font-size: 12px;
+ 
+
+}
+.textbox input{
+  border-radius: 3px;
+}
+.addbutton{
+  width: 50%;
+  outline: none;
+  border: none;
+  background-color: #53B3CB;
+  color: white;
+  width: 80px;
+  height: 25px;
+  border-radius: 10px;
+  font-size: 10px;
+  transition: ease-in 0.1s;
+}
+.addbutton:hover{
+   background-color: black;
+   color: white;
+}
+
+.textinput{
+  border: 1px solid #bbbbbb;
+  outline: none;
+  height: 20px;
+}
+
+.bold{
+  font-weight:bold;
+}
+.bold500{
+  font-weight: 500;
+}
+.f8{
+  font-size: 8px;
+}
+.f10{
+  font-size: 10px;
+}
+.f12{
+  font-size: 12px;
+}
+.f16{
+  font-size: 16px;
+}
+.p5{
+  padding: 5px;
+}
+.p10{
+  padding: 10px;
+}
+.p10x{
+  padding: 10px 0px;
+}
+.p10y{
+  padding: 0px 10px;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
 }
