@@ -4,24 +4,28 @@ import Product from "./Product";
 const Products = () => {
     const [data,setdata]=useState([]);
     const [error,setError]=useState(null);
-   
-    useEffect(() =>{
-        const fetchData = async () => {
-            try {
-                const response = await fetch("http://localhost:8080/products/getProducts");
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                const json_data = await response.json();
-                
-                setdata(json_data);
-            } catch (error) {
-            
-                setError("API might be down, Failed to fetch the data")
+    const fetchData = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/products/getProducts");
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
             }
-        };
-
+            const json_data = await response.json();
+            setError(null);
+            setdata(json_data);
+        } catch (error) {
+        
+            setError("API might be down, Failed to fetch the data")
+            setdata([]);
+        }
+    };
+    useEffect(() =>{
         fetchData();
+        const caller=setInterval(()=>{
+           fetchData();
+
+       },2000);
+       return () => clearInterval(caller);
             },[]);
     return ( 
         <div className="content">

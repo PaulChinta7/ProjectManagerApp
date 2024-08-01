@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100vh;
+  height: 100%;
   padding: 0px 200px;
 }
 .navbar{
@@ -42,15 +42,14 @@
 
 .productsContainer{
   width: 50%;
-  height: 90%;  
-
+  height: 100%;  
+  margin: 30px;
   padding: 0px 20px;
 }
 
 .productFormContainer{
   width: 50%;
   height: 90%;
-  
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -63,7 +62,10 @@
   padding: 5px;
   margin: 5px;
   border-bottom: 1px solid #eeeeee;
+  
+
 }
+
 .textbox{
   display: flex;
   flex-direction: column;
@@ -90,6 +92,23 @@
   transition: ease-in 0.1s;
 }
 .addbutton:hover{
+   background-color: black;
+   color: white;
+}
+
+.deletebutton{
+  width: 50%;
+  outline: none;
+  border: none;
+  background-color: #53B3CB;
+  color: white;
+  width: 40px;
+  height: 25px;
+  border-radius: 10px;
+  font-size: 8px;
+  transition: ease-in 0.1s;
+}
+.deletebutton:hover{
    background-color: black;
    color: white;
 }
@@ -139,4 +158,14 @@
 .flex{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.alignLeft{
+  text-align: left;
+}
+.alignRight{
+  text-align: right;
+}
+.alignCenter{
+  text-align: center;
 }
