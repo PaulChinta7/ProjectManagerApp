@@ -9,10 +9,25 @@
 .navbar{
   background-color: #53B3CB;
   padding: 10px;
+ 
 }
-.navbar p{
+.navbar ul{
+  display: flex;
+  list-style: none;
+  font-size: 12px;
+  margin: 0px;
+  padding-left: 0px;
+}
+.navbar ul li a {
+  text-decoration: none;
+  font-size: 12px;
+  padding: 0px 10px;
+  color: #282c34;
+}
+.navbar ul li p{
   margin: 0px;
 }
+/* .navbar */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -28,14 +43,14 @@
 .productsContainer{
   width: 50%;
   height: 90%;  
-  margin: 20px;
-  padding: 20px;
+
+  padding: 0px 20px;
 }
 
 .productFormContainer{
   width: 50%;
   height: 90%;
-  margin: 20px;
+  
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -52,7 +67,7 @@
 .textbox{
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 70%;
   padding: 5px;
   margin: 5px;
   font-size: 12px;
@@ -105,6 +120,12 @@
 }
 .p5{
   padding: 5px;
+}
+.p5x{
+  padding: 5px 0px;
+}
+.p5y{
+  padding: 0px 5px;
 }
 .p10{
   padding: 10px;

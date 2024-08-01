@@ -3,6 +3,7 @@ import Product from "./Product";
 
 const Products = () => {
     const [data,setdata]=useState([]);
+    const [error,setError]=useState(null);
    
     useEffect(() =>{
         const fetchData = async () => {
@@ -15,19 +16,25 @@ const Products = () => {
                 
                 setdata(json_data);
             } catch (error) {
-                console.error("Error fetching data:", error);
+            
+                setError("API might be down, Failed to fetch the data")
             }
         };
 
         fetchData();
             },[]);
     return ( 
-        
+        <div className="content">
         <div className="productsContainer">
             <p className="flex p10y">Products</p>
-            {data.map((item,index) => (<Product key={item.product_id} product={item}/>) )}
+            {error && <div style={{ marginTop: '10px', padding: '10px', backgroundColor:'#FF0000', color: 'white' }}>
+          {error}
+        </div>}
+        {/* add loader */}
+            {data.map((item) => (<Product key={item.product_id} product={item}/>) )}
 
 
+        </div>
         </div>
      );
 }
