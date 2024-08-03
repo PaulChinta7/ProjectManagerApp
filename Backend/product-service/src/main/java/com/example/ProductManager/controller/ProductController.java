@@ -2,9 +2,11 @@ package com.example.ProductManager.controller;
 
 import com.example.ProductManager.dto.ProductDto;
 import com.example.ProductManager.model.Product;
+import com.example.ProductManager.producer.KafkaProducer;
 import com.example.ProductManager.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,11 @@ import java.util.UUID;
 public class ProductController {
     @Autowired
     private ProductService productservice;
+    @Autowired
+    private KafkaProducer kafkaProducer;
+    
+    
+    
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getProducts")
     public ResponseEntity<List<ProductDto>> getProducts(){
@@ -47,5 +54,10 @@ public class ProductController {
     }
 //    send an update event to kafka broker with the updated price , the kafka server will send the message to the consumer, where 
 //    the data will be taken and then updates the product price in the other microservice.
-    
+    @PostMapping("/update")
+    public ResponseEntity<Void> updateProductPrice(@RequestParam String msg){
+        kafkaProducer.publishUpdateMessage(msg);
+        return new ResponseEntity<>(HttpStatus.OK);
+        
+    }
 }

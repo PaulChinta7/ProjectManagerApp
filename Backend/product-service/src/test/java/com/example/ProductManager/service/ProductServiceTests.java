@@ -5,6 +5,7 @@ import com.example.ProductManager.Mapper.Mapper;
 import com.example.ProductManager.dao.ProductDao;
 import com.example.ProductManager.dto.ProductDto;
 import com.example.ProductManager.model.Product;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,8 +17,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.mockito.Mockito.when;
 
-@DataJpaTest
+
 @ExtendWith(MockitoExtension.class)
+@RequiredArgsConstructor
 public class ProductServiceTests {
     
     @Mock
