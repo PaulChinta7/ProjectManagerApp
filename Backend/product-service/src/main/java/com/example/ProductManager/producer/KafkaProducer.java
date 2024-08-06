@@ -11,7 +11,6 @@ public class KafkaProducer {
     
     public void publishUpdateMessage(String msg){
         kafkaTemplate.send("UPDATE_TOPIC",msg);
-        
     }
     
     

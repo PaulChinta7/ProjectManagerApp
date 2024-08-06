@@ -1,6 +1,7 @@
 package com.example.ProductManager.controller;
 
 import com.example.ProductManager.dto.ProductDto;
+import com.example.ProductManager.event.UpdatePriceEvent;
 import com.example.ProductManager.model.Product;
 import com.example.ProductManager.producer.KafkaProducer;
 import com.example.ProductManager.service.ProductService;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class ProductController {
     private ProductService productservice;
     @Autowired
     private KafkaProducer kafkaProducer;
+    @Autowired
+    private KafkaTemplate<String,UpdatePriceEvent> kafkaTemplate;
     
     
     
@@ -55,8 +59,13 @@ public class ProductController {
 //    send an update event to kafka broker with the updated price , the kafka server will send the message to the consumer, where 
 //    the data will be taken and then updates the product price in the other microservice.
     @PostMapping("/update")
-    public ResponseEntity<Void> updateProductPrice(@RequestParam String msg){
-        kafkaProducer.publishUpdateMessage(msg);
+    public ResponseEntity<Void> updateProductPrice(@RequestParam String msg,@RequestParam UUID id, @RequestParam Double price){
+        UpdatePriceEvent updatePriceEvent= UpdatePriceEvent.builder()
+                .product_id(id)
+                .updated_price(price)
+                .msg(msg)
+                .build();
+        kafkaTemplate.send("UPDATE_TOPIC",updatePriceEvent);
         return new ResponseEntity<>(HttpStatus.OK);
         
     }
