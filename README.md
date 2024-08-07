@@ -4,5 +4,7 @@ React app to add and view product details;
 
 Backend. Has microservice which communicate using Kafka. 
 
-![ProductManagerProducts](https://github.com/user-attachments/assets/c9453820-872b-4690-bc5c-2d45be1099ea)
-![ProductManagerProductsForm](https://github.com/user-attachments/assets/63ff2b66-84eb-4d55-810f-58cbfcac4cd2)
+
+![ProductManagerProducts](https://github.com/user-attachments/assets/2f4011e7-3ffc-45c5-9525-26479ec72b58)
+![ProductManagerProductsForm](https://github.com/user-attachments/assets/831fbee3-9a11-4419-a668-253cd9b772c8)
+
