@@ -20,8 +20,6 @@ public class ProductService {
 
 
     public ResponseEntity<List<ProductDto>> getProducts() {
-        
-       
         List<Product> products=productdao.findAllProducts();
         List<ProductDto> product_dtos=products.stream().map(this::MaptoProductDto).toList();
         return new ResponseEntity<>(product_dtos,HttpStatus.OK);
