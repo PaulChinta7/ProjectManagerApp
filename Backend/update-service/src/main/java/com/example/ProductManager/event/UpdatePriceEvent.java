@@ -13,5 +13,4 @@ public class UpdatePriceEvent {
     private UUID id;
     private String msg;
     private Double price;
-    
 }

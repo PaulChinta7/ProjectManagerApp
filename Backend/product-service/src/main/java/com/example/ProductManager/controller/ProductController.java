@@ -3,9 +3,10 @@ package com.example.ProductManager.controller;
 import com.example.ProductManager.dto.ProductDto;
 import com.example.ProductManager.event.UpdatePriceEvent;
 import com.example.ProductManager.model.Product;
-import com.example.ProductManager.producer.KafkaProducer;
 import com.example.ProductManager.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +21,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/products")
 public class ProductController {
+    private static final Logger log = LoggerFactory.getLogger(ProductController.class);
     @Autowired
     private ProductService productservice;
+   
     @Autowired
-    private KafkaProducer kafkaProducer;
-    @Autowired
-    private KafkaTemplate<String,UpdatePriceEvent> kafkaTemplate;
+    KafkaTemplate<String,UpdatePriceEvent> kafkaTemplate;
+   
     
     
     
@@ -59,13 +61,11 @@ public class ProductController {
 //    send an update event to kafka broker with the updated price , the kafka server will send the message to the consumer, where 
 //    the data will be taken and then updates the product price in the other microservice.
     @PostMapping("/update")
-    public ResponseEntity<Void> updateProductPrice(@RequestParam String msg,@RequestParam UUID id, @RequestParam Double price){
-        UpdatePriceEvent updatePriceEvent= UpdatePriceEvent.builder()
-                .product_id(id)
-                .updated_price(price)
-                .msg(msg)
-                .build();
-        kafkaTemplate.send("UPDATE_TOPIC",updatePriceEvent);
+    public ResponseEntity<Void> updateProductPrice(@RequestBody UpdatePriceEvent updatePriceEvent){
+        
+        log.info(updatePriceEvent.toString());
+        kafkaTemplate.send("ABC_TOPIC",updatePriceEvent);
+        log.info("MESSAGE HAS BEEN SENT TO THE UPDATE TOPIC");
         return new ResponseEntity<>(HttpStatus.OK);
         
     }

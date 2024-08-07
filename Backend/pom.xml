@@ -16,8 +16,6 @@
     <modules>
         <module>product-service</module>
         <module>update-service</module>
-        <module>update-service</module>
-        <module>update-service</module>
     </modules>
     
     <properties>
