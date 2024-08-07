@@ -10,7 +10,7 @@ const ProductFrom = () => {
          const product={"product_name":productName,"product_price":parseFloat(productPrice)};
          
     try {
-        const response = await fetch('http://localhost:8080/products/addProduct', {
+        const response = await fetch('http://localhost:9000/products/addProduct', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

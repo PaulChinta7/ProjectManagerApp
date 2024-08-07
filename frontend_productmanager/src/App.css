@@ -41,7 +41,7 @@
 
 
 .productsContainer{
-  width: 50%;
+  width: 70%;
   height: 100%;  
   margin: 30px;
   padding: 0px 20px;
@@ -117,6 +117,13 @@
   border: 1px solid #bbbbbb;
   outline: none;
   height: 20px;
+}
+
+.textinput2{
+  border: 1px solid #bbbbbb;
+  outline: none;
+  width: 30px;
+  height: 15px;
 }
 
 .bold{

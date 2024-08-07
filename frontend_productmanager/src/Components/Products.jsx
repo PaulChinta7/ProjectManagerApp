@@ -6,7 +6,7 @@ const Products = () => {
     const [error,setError]=useState(null);
     const fetchData = async () => {
         try {
-            const response = await fetch("http://localhost:8080/products/getProducts");
+            const response = await fetch("http://localhost:9000/products/getProducts");
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
