@@ -4,6 +4,8 @@ import com.example.ProductManager.dao.ProductDao;
 import com.example.ProductManager.dto.ProductDto;
 import com.example.ProductManager.exception.ProductNotFoundException;
 import com.example.ProductManager.model.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.UUID;
 
 @Service
 public class ProductService {
+    private static final Logger log = LoggerFactory.getLogger(ProductService.class);
     @Autowired
     private ProductDao productdao;
 
@@ -22,6 +25,7 @@ public class ProductService {
     public ResponseEntity<List<ProductDto>> getProducts() {
         List<Product> products=productdao.findAllProducts();
         List<ProductDto> product_dtos=products.stream().map(this::MaptoProductDto).toList();
+        log.info("PRODUCTSERVICE getProducts: REQUEST TO GET ALL PRODUCTS FROM PRODUCT REPOSITORY");
         return new ResponseEntity<>(product_dtos,HttpStatus.OK);
     }
 
@@ -33,6 +37,7 @@ public class ProductService {
                     .product_name(product.get().getProduct_name())
                     .product_price(product.get().getProduct_price())
                     .build();
+            log.info("PRODUCTSERVICE getProduct: REQUEST TO GET ADD A PRODUCT TO PRODUCT REPOSITORY");
             return new ResponseEntity<ProductDto>(productDto,HttpStatus.OK);
         }
         else{
@@ -55,6 +60,7 @@ public class ProductService {
                 .product_price((productDto.getProduct_price()))
                 .build();
         productdao.save(product);
+        
         return new ResponseEntity<>(product,HttpStatus.CREATED);
     }
 
@@ -64,6 +70,7 @@ public class ProductService {
                     product_name(productdto.getProduct_name())
                     .product_price(productdto.getProduct_price())
                     .build();
+            log.info("PRODUCTSERVICE addProducts: REQUEST TO GET ADD MULTIPLE PRODUCTS TO A PRODUCT REPOSITORY");
             productdao.save(product);
         }
         return new ResponseEntity<>(HttpStatus.OK);
@@ -78,6 +85,8 @@ public class ProductService {
                     .product_name(product.get().getProduct_name())
                     .product_price(product.get().getProduct_price())
                     .build();
+
+            log.info("PRODUCTSERVICE deleteById: REQUEST TO DELETE A PRODUCT IN PRODUCT REPOSITORY");
             return new ResponseEntity<>(productDto,HttpStatus.OK);
         }
         else{

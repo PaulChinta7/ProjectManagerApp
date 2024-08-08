@@ -34,10 +34,12 @@ public class ProductController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getProducts")
     public ResponseEntity<List<ProductDto>> getProducts(){
+        log.info("PRODUCT CONTROLLER products/getProducts: REQUEST TO GET ALL PRODUCTS FROM PRODUCT SERVICE");
         return productservice.getProducts();
     }
     @PostMapping("/getProduct")
     public ResponseEntity<ProductDto> getProduct(@RequestParam String product_name){
+
         return productservice.getProduct(product_name);
         
     }
@@ -45,6 +47,7 @@ public class ProductController {
 @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/addProduct")
     public ResponseEntity<Product> addProduct(@RequestBody ProductDto productDto){
+    log.info("PRODUCT CONTROLLER products/addProduct: REQUEST TO GET ADD A PRODUCT TO PRODUCT SERVICES");
         return productservice.addProduct(productDto);
     }
 //    add products from a list of json.
@@ -55,6 +58,7 @@ public class ProductController {
     
     @DeleteMapping("/delete")
     public ResponseEntity<ProductDto> deleteById(@RequestParam UUID product_id){
+        log.info("PRODUCT CONTROLLER products/delete: REQUEST TO GET delete A PRODUCT IN PRODUCT SERVICES");
         return productservice.deleteById(product_id);
         
     }
@@ -65,7 +69,7 @@ public class ProductController {
         
         log.info(updatePriceEvent.toString());
         kafkaTemplate.send("ABC_TOPIC",updatePriceEvent);
-        log.info("MESSAGE HAS BEEN SENT TO THE UPDATE TOPIC");
+        log.info("PRODUCT CONTROLLER products/update | KAFKA-MESSAGE HAS BEEN SENT TO THE UPDATE TOPIC");
         return new ResponseEntity<>(HttpStatus.OK);
         
     }
