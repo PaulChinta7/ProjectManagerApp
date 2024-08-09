@@ -25,8 +25,7 @@ public class ProductController {
     @Autowired
     private ProductService productservice;
    
-    @Autowired
-    KafkaTemplate<String,UpdatePriceEvent> kafkaTemplate;
+    
    
     
     
@@ -66,11 +65,6 @@ public class ProductController {
 //    the data will be taken and then updates the product price in the other microservice.
     @PostMapping("/update")
     public ResponseEntity<Void> updateProductPrice(@RequestBody UpdatePriceEvent updatePriceEvent){
-        
-        log.info(updatePriceEvent.toString());
-        kafkaTemplate.send("ABC_TOPIC",updatePriceEvent);
-        log.info("PRODUCT CONTROLLER products/update | KAFKA-MESSAGE HAS BEEN SENT TO THE UPDATE TOPIC");
-        return new ResponseEntity<>(HttpStatus.OK);
-        
+        return productservice.updateProductPrice(updatePriceEvent);
     }
 }

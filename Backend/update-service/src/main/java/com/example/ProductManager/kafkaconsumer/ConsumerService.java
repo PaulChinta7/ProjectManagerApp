@@ -19,7 +19,7 @@ public class ConsumerService {
     private ProductDao productDao;
     
     
-    @KafkaListener(topics = "ABC_TOPIC",groupId ="my-group")
+    @KafkaListener(topics = "UPDATE_TOPIC",groupId ="my-group")
     public void consume(UpdatePriceEvent updatePriceEvent){
         try {
             

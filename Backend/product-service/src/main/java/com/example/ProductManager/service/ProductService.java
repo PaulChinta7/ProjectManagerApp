@@ -2,6 +2,7 @@ package com.example.ProductManager.service;
 
 import com.example.ProductManager.dao.ProductDao;
 import com.example.ProductManager.dto.ProductDto;
+import com.example.ProductManager.event.UpdatePriceEvent;
 import com.example.ProductManager.exception.ProductNotFoundException;
 import com.example.ProductManager.model.Product;
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,8 @@ public class ProductService {
     private static final Logger log = LoggerFactory.getLogger(ProductService.class);
     @Autowired
     private ProductDao productdao;
+    @Autowired
+    KafkaTemplate<String,UpdatePriceEvent> kafkaTemplate;
 
 
     public ResponseEntity<List<ProductDto>> getProducts() {
@@ -92,5 +96,12 @@ public class ProductService {
         else{
             throw new ProductNotFoundException("Product is not found in the Database with id"+productId.toString());
         }
+    }
+
+    public ResponseEntity<Void> updateProductPrice(UpdatePriceEvent updatePriceEvent) {
+        log.info(updatePriceEvent.toString());
+        kafkaTemplate.send("UPDATE_TOPIC",updatePriceEvent);
+        log.info("PRODUCT CONTROLLER products/update | KAFKA-MESSAGE HAS BEEN SENT TO THE UPDATE TOPIC");
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
