@@ -1,5 +1,14 @@
 # ProjectManagerApp
 
+## How to Run - This project is dockerized.
+
+```
+git clone git@github.com:PaulChinta7/ProjectManagerApp.git
+cd backend
+docker-compose up --build
+open in any browswer-> http://localhost:3000
+```
+
 ## FrontEnd 
 **ReactJS** : Used to create Web pages to fetch and render data onto the web pages.
 
